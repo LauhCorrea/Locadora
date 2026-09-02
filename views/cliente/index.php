@@ -1,3 +1,11 @@
+<?php
+    // Incluir o arquivo para carregamento das classes
+    require "../../autoload.php";
+
+    // Instanciar um objeto da classe DAO
+    $dao = new ClienteDAO();
+?>
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
@@ -359,18 +367,31 @@
           <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
           >
-            <h1 class="h2">CRUD: Livraria</h1>
-          </div>
-
-          <h2>CRUD: Livraria</h2>
-          <div class="table-responsive small">
-            <p> 
-              Sistema Orientado a Objetos que faz um CRUD de uma livraria como demonstração para a tuma de INF4 do ao de 2026.
-            </p>
-            <p>
-              O Sistema está sendo desenvolvido seguindo o padrão DAO.
-            </p>
+            <h1 class="h2">Gerenciamento de Clientes</h1>
             
+          </div>
+          
+          <div class="table-responsive small">
+            <table class="table table-hover">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Senha</th>
+                    <th>Telefone</th>
+                    <th>Tipo_usuario</th>
+                </tr>
+                <?php foreach($dao->read() as $cliente) : ?>
+                    <tr>
+                        <td><?= $cliente->getId() ?></td>
+                        <td><?= $cliente->getNome() ?></td>
+                        <td><?= $cliente->getEmail() ?></td>
+                        <td><?= $cliente->getSenha() ?></td>
+                        <td><?= $cliente->getTelefone() ?></td>
+                        <td><?= $cliente->getTipo_usuario() ?></td>
+                    </tr>
+                <?php endforeach ?>
+            </table>
           </div>
         </main>
       </div>

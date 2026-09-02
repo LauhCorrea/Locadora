@@ -1,5 +1,5 @@
 <?php
-    class Cliente {
+    class Pagamento {
         //Atributos
         private $id;
         private $forma_pagamento;

@@ -31,27 +31,27 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link d-flex align-items-center gap-2" href="#">
+                  <a class="nav-link d-flex align-items-center gap-2" href="../cliente">
                     <svg class="bi" aria-hidden="true">
                       <use xlink:href="#people"></use>
                     </svg>
-                    Customers
+                    Clientes
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link d-flex align-items-center gap-2" href="#">
+                  <a class="nav-link d-flex align-items-center gap-2" href="../categoria">
                     <svg class="bi" aria-hidden="true">
                       <use xlink:href="#graph-up"></use>
                     </svg>
-                    Reports
+                    Categoria
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link d-flex align-items-center gap-2" href="#">
+                  <a class="nav-link d-flex align-items-center gap-2" href="../pagamento">
                     <svg class="bi" aria-hidden="true">
                       <use xlink:href="#puzzle"></use>
                     </svg>
-                    Integrations
+                    Pagamento
                   </a>
                 </li>
               </ul>

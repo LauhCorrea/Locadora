@@ -3,10 +3,29 @@
         public function read() {
             try {
                 $query = BD::getConexao()->prepare("SELECT * FROM cliente");
+                
+                if(!$query->execute()) {
+                    print_r($query->errorInfo());
+                }
+
+                $listaClientes = array();
+                foreach($query->fetchAll(PDO::FETCH_ASSOC) as $linha) {
+                    $cliente = new Cliente(); // Classe bean
+                    $cliente->setId($linha['id_Cliente']);
+                    $cliente->setNome($linha['nome']);
+                    $cliente->setEmail($linha['email']);
+                    $cliente->setSenha($linha['senha']);
+                    $cliente->setTelefone($linha['telefone']);
+                    $cliente->setTipo_usuario($linha['tipo_usuario']);
+
+                    array_push($listaClientes, $cliente);
+                }
+                
+                return $listaClientes;
             } 
             catch(PDOException $e) {
                 echo "Erro #2: " . $e->getMessage();
-            }
+            }            
         }
     }
 ?>

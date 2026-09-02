@@ -1,5 +1,5 @@
 <?php
-    class Cliente {
+    class Categoria {
         //Atributos
         private $id;
         private $nome_categoria;
@@ -14,7 +14,7 @@
         }
 
         public function getNome_categoria() {
-            return $this->nome_categoria_categoria;
+            return $this->nome_categoria;
         }
 
         public function setNome_categoria($nome_categoria) {
