@@ -380,6 +380,7 @@
                     <th>Senha</th>
                     <th>Telefone</th>
                     <th>Tipo_usuario</th>
+                    <th>Ações</th>
                 </tr>
                 <?php foreach($dao->read() as $cliente) : ?>
                     <tr>
@@ -389,6 +390,14 @@
                         <td><?= $cliente->getSenha() ?></td>
                         <td><?= $cliente->getTelefone() ?></td>
                         <td><?= $cliente->getTipo_usuario() ?></td>
+                        <td>
+                          <a href="edit.php?id=<?= $cliente->getId()?>">
+                          Editar
+                          </a>
+                          <a href="destroy.php?id=<?= $cliente->getId()?>">
+                          Excluir
+                          </a>
+                        </td>
                     </tr>
                 <?php endforeach ?>
             </table>
