@@ -1,29 +1,49 @@
-<?php 
+<?php
     class ClienteDAO {
+        public function create($cliente) {
+            try {
+                $query = BD::getConexao()->prepare(
+                    "INSERT INTO cliente(nome, cpf, email, telefone) 
+                    VALUES (:n, :c, :e, :t)"
+                );
+                $query->bindValue(':n', $cliente->getNome(), PDO::PARAM_STR);
+                $query->bindValue(':c', $cliente->getCpf(), PDO::PARAM_STR);
+                $query->bindValue(':e', $cliente->getEmail(), PDO::PARAM_STR);
+                $query->bindValue(':t', $cliente->getTelefone(), PDO::PARAM_STR);
+
+                if(!$query->execute()) {
+                    print_r($query->errorInfo());
+                }
+            }
+            catch(PDOException $e) {
+                echo "Erro #1: " . $e->getMessage();
+            }
+        }
+
         public function read() {
             try {
                 $query = BD::getConexao()->prepare("SELECT * FROM cliente");
-
+                
                 if(!$query->execute()) {
-                    print r($queri->errorInfo());
+                    print_r($query->errorInfo());
                 }
+
                 $listaClientes = array();
-                foreach($query->fetchALL(PDO::FETCH_ASSOC) as $linhas) {
-                    $cliente = new Cliente(); //Clase bean
+                foreach($query->fetchAll(PDO::FETCH_ASSOC) as $linha) {
+                    $cliente = new Cliente(); // Classe bean
                     $cliente->setId($linha['id_cliente']);
-                    $cliente->setId($linha['nome']);
-                    $cliente->setId($linha['email']);
-                    $cliente->setId($linha['senha']);
-                    $cliente->setId($linha['telefone']);
-                    $cliente->setId($linha['tipo_usuario']);
-                   
+                    $cliente->setNome($linha['nome']);
+                    $cliente->setCpf($linha['cpf']);
+                    $cliente->setEmail($linha['email']);
+                    $cliente->setTelefone($linha['telefone']);
+
                     array_push($listaClientes, $cliente);
                 }
-                return $listarCllientes;
+                
+                return $listaClientes;
             } 
             catch(PDOException $e) {
                 echo "Erro #2: " . $e->getMessage();
-            }
+            }            
         }
     }
-?>
