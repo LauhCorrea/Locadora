@@ -6,7 +6,7 @@
     $categoria = new Categoria();
 
     // Definir os valores dos atributos a partir do form
-    $cliente->setNome_categoria($_POST['nome_categoria']);
+    $categoria->setNome_categoria($_POST['nome_categoria']);
 
 
     // Instanciar um objeto da classe ClienteDAO

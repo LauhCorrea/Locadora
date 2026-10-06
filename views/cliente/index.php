@@ -26,6 +26,7 @@
     <link href="../../css/bootstrap.min.css" rel="stylesheet" />
     <meta name="theme-color" content="#712cf9" />
     <link href="../../css/dashboard.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -391,11 +392,11 @@
                         <td><?= $cliente->getTelefone() ?></td>
                         <td><?= $cliente->getTipo_usuario() ?></td>
                         <td>
-                          <a href="edit.php?id=<?= $cliente->getId()?>">
-                          Editar
+                          <a title="Editar" href="edit.php?id=<?= $cliente->getId()?>">
+                          <i class="bi bi-pen"></i>
                           </a>
-                          <a href="destroy.php?id=<?= $cliente->getId()?>">
-                          Excluir
+                          <a title="Excluir" class="link-danger" href="destroy.php?id=<?= $cliente->getId()?>">
+                          <i class="bi bi-trash3"></i>
                           </a>
                         </td>
                     </tr>

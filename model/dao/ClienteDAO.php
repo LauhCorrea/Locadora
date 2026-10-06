@@ -31,7 +31,7 @@
                 $listaClientes = array();
                 foreach($query->fetchALL(PDO::FETCH_ASSOC) as $linha) {
                     $cliente = new Cliente(); //Clase bean
-                    $cliente->setId($linha['id_cliente']);
+                    $cliente->setId($linha['id_Cliente']);
                     $cliente->setNome($linha['nome']);
                     $cliente->setEmail($linha['email']);
                     $cliente->setSenha($linha['senha']);
@@ -40,7 +40,7 @@
                    
                     array_push($listaClientes, $cliente);
                 }
-                return $listarClientes;
+                return $listaClientes;
             } 
             catch(PDOException $e) {
                 echo "Erro #2: " . $e->getMessage();
@@ -50,7 +50,7 @@
 
         public function find($id) {
             try {
-                $query = BD::getConexao()->prepare("SELECT * FROM cliente WHERE id_cliente= :i");
+                $query = BD::getConexao()->prepare("SELECT * FROM cliente WHERE id_Cliente= :i");
                 $query->bindValue(':i', $id, PDO::PARAM_INT);
 
                 if(!$query->execute()) {
@@ -79,8 +79,8 @@
         public function update($cliente) {
             try {
                 $query = BD::getConexao()->prepare(
-                    "UPDATE cliente SET nome = :n, email = :e, senha = :s, telefone = :t, ripo_usuario = :tp 
-                    WHERE id_cliente = :i"
+                    "UPDATE cliente SET nome = :n, email = :e, senha = :s, telefone = :t, tipo_usuario = :tp 
+                    WHERE id_Cliente = :i"
                 );
                 $query->bindValue(':i', $cliente->getId(), PDO::PARAM_STR);
                 $query->bindValue(':n', $cliente->getNome(), PDO::PARAM_STR);
@@ -102,7 +102,7 @@
             try {
                 $query = BD::getConexao()->prepare(
                     "DELETE FROM cliente
-                    WHERE id_cliente = :i"
+                    WHERE id_Cliente = :i"
                 );
                 $query->bindValue(':i', $id, PDO::PARAM_STR);
 

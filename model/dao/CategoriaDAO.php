@@ -44,7 +44,7 @@
 
         public function find($id) {
             try {
-                $query = BD::getConexao()->prepare("SELECT * FROM cliente WHERE id_cliente= :i");
+                $query = BD::getConexao()->prepare("SELECT * FROM categoria WHERE id_Categoria= :i");
                 $query->bindValue(':i', $id, PDO::PARAM_INT);
 
                 if(!$query->execute()) {
@@ -52,16 +52,12 @@
                 }
 
                 if($linha = $query->fetch(PDO::FETCH_ASSOC)) {
-                    $cliente = new Cliente(); //Clase bean
-                    $cliente->setId($linha['id_Cliente']);
-                    $cliente->setNome($linha['nome']);
-                    $cliente->setEmail($linha['email']);
-                    $cliente->setSenha($linha['senha']);
-                    $cliente->setTelefone($linha['telefone']);
-                    $cliente->setTipo_usuario($linha['tipo_usuario']);
+                    $categoria = new Categoria(); //Clase bean
+                    $categoria->setId($linha['id_Categoria']);
+                    $categoria->setNome_categoria($linha['nome_categoria']);
                    
                 }
-                return $cliente;
+                return $categoria;
             } 
             catch(PDOException $e) {
                 echo "Erro #3: " . $e->getMessage();
@@ -70,18 +66,14 @@
     
 
 
-        public function update($cliente) {
+        public function update($categoria) {
             try {
                 $query = BD::getConexao()->prepare(
-                    "UPDATE cliente SET nome = :n, email = :e, senha = :s, telefone = :t, ripo_usuario = :tp 
-                    WHERE id_cliente = :i"
+                    "UPDATE categoria SET nome = :n, 
+                    WHERE id_Categoria = :i"
                 );
-                $query->bindValue(':i', $cliente->getId(), PDO::PARAM_STR);
-                $query->bindValue(':n', $cliente->getNome(), PDO::PARAM_STR);
-                $query->bindValue(':e', $cliente->getEmail(), PDO::PARAM_STR);
-                $query->bindValue(':s', $cliente->getSenha(), PDO::PARAM_STR);
-                $query->bindValue(':t', $cliente->getTelefone(), PDO::PARAM_STR);
-                $query->bindValue(':tp', $cliente->getTipo_usuario(), PDO::PARAM_STR);
+                $query->bindValue(':i', $categoria->getId_Categoria(), PDO::PARAM_STR);
+                $query->bindValue(':n', $categoria->getNome_categoria(), PDO::PARAM_STR);
 
                 if(!$query->execute()) {
                     print_r($query->errorInfo());
@@ -95,8 +87,8 @@
         public function destroy($id) {
             try {
                 $query = BD::getConexao()->prepare(
-                    "DELETE FROM cliente
-                    WHERE id_cliente = :i"
+                    "DELETE FROM categoria
+                    WHERE id_Categoria = :i"
                 );
                 $query->bindValue(':i', $id, PDO::PARAM_STR);
 
