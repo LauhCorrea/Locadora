@@ -26,6 +26,7 @@
     <link href="../../css/bootstrap.min.css" rel="stylesheet" />
     <meta name="theme-color" content="#712cf9" />
     <link href="../../css/dashboard.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -381,6 +382,14 @@
                     <tr>
                         <td><?= $categoria->getId() ?></td>
                         <td><?= $categoria->getNome_categoria() ?></td>
+                        <td>
+                        <a title="Editar" href="edit.php?id=<?= $categoria->getId()?>">
+                          <i class="bi bi-pen"></i>
+                          </a>
+                          <a title="Excluir" class="link-danger" href="destroy.php?id=<?= $categoria->getId()?>">
+                          <i class="bi bi-trash3"></i>
+                          </a>
+                        </td>
                     </tr>
                 <?php endforeach ?>
             </table>

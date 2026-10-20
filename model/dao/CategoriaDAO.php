@@ -34,7 +34,7 @@
                    
                     array_push($listaCategoria, $categoria);
                 }
-                return $listarCategoria;
+                return $listaCategoria;
             } 
             catch(PDOException $e) {
                 echo "Erro #2: " . $e->getMessage();
@@ -69,10 +69,10 @@
         public function update($categoria) {
             try {
                 $query = BD::getConexao()->prepare(
-                    "UPDATE categoria SET nome = :n, 
+                    "UPDATE categoria SET nome_categoria= :n 
                     WHERE id_Categoria = :i"
                 );
-                $query->bindValue(':i', $categoria->getId_Categoria(), PDO::PARAM_STR);
+                $query->bindValue(':i', $categoria->getId(), PDO::PARAM_STR);
                 $query->bindValue(':n', $categoria->getNome_categoria(), PDO::PARAM_STR);
 
                 if(!$query->execute()) {
