@@ -3,7 +3,7 @@
     require "../../autoload.php";
 
     // Instanciar um objeto da classe DAO
-    $dao = new CategoriaDAO();
+    $dao = new PedidoDAO();
 ?>
 
 <!doctype html>
@@ -368,25 +368,34 @@
           <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
           >
-            <h1 class="h2">Gerenciamento de Categorias</h1>
+            <h1 class="h2">Gerenciamento de Pedidos</h1>
             
+          </div>
+
+          <div>
+            <a href="create.php">Novo Pedido</a>
           </div>
           
           <div class="table-responsive small">
             <table class="table table-hover">
                 <tr>
                     <th>ID</th>
-                    <th>Nome_categoria</th>
+                    <th>Data Pedido</th>
+                    <th>Valor Total</th>
+                    <th>Status</th>
+                    
                 </tr>
-                <?php foreach($dao->read() as $categoria) : ?>
+                <?php foreach($dao->read() as $pedido) : ?>
                     <tr>
-                        <td><?= $categoria->getId() ?></td>
-                        <td><?= $categoria->getNome_categoria() ?></td>
+                        <td><?= $pedido->getId() ?></td>
+                        <td><?= $pedido->getData_pedido() ?></td>
+                        <td><?= $pedido->getValor_total() ?></td>
+                        <td><?= $pedido->getStatus() ?></td>
                         <td>
-                        <a title="Editar" href="edit.php?id=<?= $categoria->getId()?>">
+                          <a title="Editar" href="edit.php?id=<?= $pedido->getId()?>">
                           <i class="bi bi-pen"></i>
                           </a>
-                          <a title="Excluir" class="link-danger" href="destroy.php?id=<?= $categoria->getId()?>">
+                          <a title="Excluir" class="link-danger" href="destroy.php?id=<?= $pedido->getId()?>">
                           <i class="bi bi-trash3"></i>
                           </a>
                         </td>
