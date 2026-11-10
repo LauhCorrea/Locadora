@@ -359,24 +359,28 @@
           <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
           >
-            <h1 class="h2">Cadastrar Pedido</h1>           
+            <h1 class="h2">Cadastrar Cliente</h1>           
             
           </div>        
           
           <div class="table-responsive small">
             <form action="insert.php" method="post">
                 <div class="form-group">
-                    <label for="data_pedido">Data Pedido</label>
-                    <input type="text" name="data_pedido" class="form-control">
+                    <label for="nome">Nome</label>
+                    <input type="text" name="nome" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="valor_total">Valor Total</label>
-                    <input type="text" name="email" class="form-control">
+                    <label for="cpf">CPF</label>
+                    <input type="text" name="cpf" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="status">Status</label>
-                    <input type="status" name="status" class="form-control">
-              
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" name="telefone" class="form-control">
+                </div>
                 <div class="form-group">
                     <input type="reset" value="Limpar" class="btn">
                     <input type="submit" value="Salvar" class="btn btn-success">

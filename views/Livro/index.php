@@ -371,6 +371,10 @@
             <h1 class="h2">Gerenciamento de Livros :D</h1>
             
           </div>
+
+          <div>
+            <a href="create.php">Novo Livro</a>
+          </div>
           
           <div class="table-responsive small">
             <table class="table table-hover">
@@ -387,18 +391,18 @@
                 <?php foreach($dao->read() as $livro) : ?>
                     <tr>
                         <td><?= $livro->getId() ?></td>
-                        <td><?= $livro->getTítulo() ?></td>
+                        <td><?= $livro->getTitulo() ?></td>
                         <td><?= $livro->getAutor() ?></td>
                         <td><?= $livro->getEditora() ?></td>
                         <td><?= $livro->getPreco() ?></td>
                         <td><?= $livro->getEstoque() ?></td>
-                        <td><?= $livro->getCategoria()->getDescricao() ?></td>
+                        <td><?= $livro->getCategoria()->getNome_categoria() ?></td>
                         <td>
                           <a title="Editar" href="edit.php?id=<?= $livro->getId()?>">
-                          <i class="bi bi-pen"></i>
+                            <i class="bi bi-pen"></i>
                           </a>
                           <a title="Excluir" class="link-danger" href="destroy.php?id=<?= $livro->getId()?>">
-                          <i class="bi bi-trash3"></i>
+                            <i class="bi bi-trash3"></i>
                           </a>
                         </td>
                     </tr>

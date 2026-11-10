@@ -371,6 +371,10 @@
             <h1 class="h2">Gerenciamento de Categorias</h1>
             
           </div>
+
+          <div>
+            <a href="create.php">Nova Categoria</a>
+          </div>
           
           <div class="table-responsive small">
             <table class="table table-hover">

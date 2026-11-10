@@ -3,13 +3,13 @@
         public function create($livro) {
             try {
                 $query = BD::getConexao()->prepare(
-                    "INSERT INTO livro(titulo, autor, editora, estoque, estoque, id_Categoria) 
+                    "INSERT INTO livro(titulo, autor, editora, preco, estoque, id_Categoria) 
                     VALUES (:t, :a, :e, :p, :q, :c)"
                 );
                 $query->bindValue(':t', $livro->getTitulo(), PDO::PARAM_STR);
                 $query->bindValue(':a', $livro->getAutor(), PDO::PARAM_INT);
                 $query->bindValue(':e', $livro->getEditora(), PDO::PARAM_STR);
-                $query->bindValue(':p', $livro->getestoque(), PDO::PARAM_INT);
+                $query->bindValue(':p', $livro->getPreco(), PDO::PARAM_INT);
                 $query->bindValue(':q', $livro->getEstoque(), PDO::PARAM_INT);
                 //Bind para chave estrangeira
                 $query->bindValue(':c', $livro->getCategoria()->getId(), PDO::PARAM_INT);
@@ -34,11 +34,11 @@
                 $listalivros = array();
                 foreach($query->fetchAll(PDO::FETCH_ASSOC) as $linha) {
                     $livro = new livro(); // Classe bean
-                    $livro->setId($linha['id_livro']);
+                    $livro->setId($linha['id_Livro']);
                     $livro->setTitulo($linha['titulo']);
                     $livro->setAutor($linha['autor']);
                     $livro->setEditora($linha['editora']);
-                    $livro->setEstoque($linha['preco']);
+                    $livro->setPreco($linha['preco']);
                     $livro->setEstoque($linha['estoque']);
                     //Atributo da associação com Categoria
                     $daoCategoria = new CategoriaDAO();
@@ -72,7 +72,7 @@
                     $livro->setTitulo($linha['titulo']);
                     $livro->setAutor($linha['autor']);
                     $livro->setEditora($linha['editora']);
-                    $livro->setEstoque($linha['preco']);
+                    $livro->setPreco($linha['preco']);
                     $livro->setEstoque($linha['estoque']);
                 }
                 
@@ -92,9 +92,9 @@
                 );
                 $query->bindValue(':t', $livro->getTitulo(), PDO::PARAM_STR);
                 $query->bindValue(':a', $livro->getAutor(), PDO::PARAM_INT);
-                $query->bindValue(':s', $livro->getEditora(), PDO::PARAM_STR);
-                $query->bindValue(':e', $livro->getPreco(), PDO::PARAM_INT);
-                $query->bindValue(':i', $livro->getestoque(), PDO::PARAM_INT);
+                $query->bindValue(':e', $livro->getEditora(), PDO::PARAM_STR);
+                $query->bindValue(':p', $livro->getPreco(), PDO::PARAM_INT);
+                $query->bindValue(':q', $livro->getestoque(), PDO::PARAM_INT);
                 $query->bindValue(':i', $livro->getId(), PDO::PARAM_INT);
 
                 if(!$query->execute()) {

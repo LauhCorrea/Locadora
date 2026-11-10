@@ -385,15 +385,14 @@
                 </div>
                 <div class="form-group">
                     <label for="Preco">Preço</label>
-                    <input type="text" name="Preco" class="form-control">
+                    <input type="text" name="preco" class="form-control">
                 </div>
 
-                //Chave estrangeira
                 <div class="form-group">
                     <label for="id_Categoria">Categoria</label>
                     <select name="id_Categoria" class="form-control">
                     <?php foreach($daoCategoria->read() as $categoria) : ?>
-                        <option value="?= $categoria->getId() ?>"><?= $categoria->getDescricao() ?></option>
+                        <option value="<?= $categoria->getId() ?>"><?= $categoria->getNome_categoria() ?></option>
                         <?php endforeach ?>
                     </select>
                 </div>

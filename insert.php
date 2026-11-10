@@ -2,22 +2,20 @@
     // Incluir o arquivo de autoload
     require "../../autoload.php";
 
-    // Instanciar um objeto da classe pedido (bean)
-    $pedido = new Pedido();
+    // Instanciar um objeto da classe Cliente (bean)
+    $cliente = new Cliente();
 
     // Definir os valores dos atributos a partir do form
-    $pedido->setNome($_POST['nome']);
-    $pedido->setEmail($_POST['email']);
-    $pedido->setSenha($_POST['senha']);
-    $pedido->setTelefone($_POST['telefone']);
-    $pedido->setTipo_usuario($_POST['tipo_usuario']);
+    $cliente->setNome($_POST['nome']);
+    $cliente->setCpf($_POST['cpf']);
+    $cliente->setEmail($_POST['email']);
+    $cliente->setTelefone($_POST['telefone']);
 
-
-    // Instanciar um objeto da classe pedidoDAO
-    $dao = new pedidoDAO();
+    // Instanciar um objeto da classe ClienteDAO
+    $dao = new ClienteDAO();
 
     // Invocar o método create
-    $dao->create($pedido);
+    $dao->create($cliente);
 
     // Redirecionar para o index (COMENTAR CASO NÃO FUNCIONE)
     header('Location: index.php');

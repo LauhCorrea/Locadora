@@ -11,6 +11,7 @@
     $livro->setEditora($_POST['editora']);
     $livro->setPreco($_POST['preco']);
     $livro->setEstoque($_POST['estoque']);
+    $livro->setEstoque($_POST['id']);
 
     //Instanciar um objeto da Categoria
     $categoria = new Categoria();

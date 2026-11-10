@@ -6,12 +6,18 @@
 
     //Definir os valores dos atributos a partir dos dados do form
 
-    $livro->setNome($_POST['titulo']);
-    $livro->setEmail($_POST['autor']);
-    $livro->setSenha($_POST['editora']);
-    $livro->setTelefone($_POST['preco']);
-    $livro->setTipo_usuario($_POST['estoque']);
-    $livro->setId($_POST['id']);
+    $livro->setTitulo($_POST['titulo']);
+    $livro->setAutor($_POST['autor']);
+    $livro->setEditora($_POST['editora']);
+    $livro->setPreco($_POST['preco']);
+    $livro->setEstoque($_POST['estoque']);
+    $livro->setId_Categoria($_POST['id']);
+     // Instanciar um objeto da Categoria
+    $categoria = new Categoria();
+    $categoria->setId($_POST['id_categoria']);
+
+    // Definir a categoria no filme
+    $livro->setCategoria($categoria);
 
     //instanciar objeto da classe livroDAO
     $dao = new livroDAO();

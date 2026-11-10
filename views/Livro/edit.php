@@ -1,8 +1,10 @@
 <?php 
     require "../../autoload.php";
 
-    $dao = new ClienteDAO();
-    $cliente = $dao->find($_GET['id']);
+    $dao = new livroDAO();
+    $livro = $dao->find($_GET['id']);
+
+    $daoCategoria = new CategoriaDAO();
 ?>
 
 <!doctype html>
@@ -366,34 +368,56 @@
           <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
           >
-            <h1 class="h2">Cadastrar Cliente</h1>           
+            <h1 class="h2">Editar Livro</h1>           
             
           </div>        
           
           <div class="table-responsive small">
             <form action="update.php" method="post">
                 <div class="form-group">
-                    <label for="nome">Nome</label>
-                    <input type="text" name="nome" value="<?= $cliente->getNome() ?>" class="form-control">
+                    <label for="titulo">Título</label>
+                    <input type="text" name="titulo" value="<?= $livro->getTitulo() ?>" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" name="email"  value="<?= $cliente->getEmail() ?>"  class="form-control">
+                    <label for="autor">Autor</label>
+                    <input type="text" name="autor"  value="<?= $livro->getAutor() ?>"  class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="senha">Senha</label>
-                    <input type="senha" name="senha"  value="<?= $cliente->getSenha() ?>" class="form-control">
+                    <label for="editora">Editora</label>
+                    <input type="editora" name="editora"  value="<?= $livro->getEditora() ?>" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="telefone">Telefone</label>
-                    <input type="text" name="telefone"  value="<?= $cliente->getTelefone() ?>" class="form-control">
+                    <label for="preco">Preço</label>
+                    <input type="text" name="preco"  value="<?= $livro->getPreco() ?>" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="tipo_usuario">Tipo_usuario</label>
-                    <input type="text" name="tipo_usuario"  value="<?= $cliente->getTipo_usuario() ?>" class="form-control">
+                    <label for="estoque">Estoque</label>
+                    <input type="text" name="estoque"  value="<?= $livro->getEstoque() ?>" class="form-control">
+                </div>
+                 <div class="form-group">
+                    <label for="id_Categoria">Categoria</label>
+                    <select name="id_Categoria" class="form-control">
+                      <?php foreach ($daoCategoria->read() as $categoria) : ?>
+                        <?php if ($categoria->getId() == $livro->getCategoria()->getId()) : ?>
+                          <option select value="<?= $categoria->getId()?>">
+                            <?= $categoria->getDescricao() ?>
+                          </option>
+                        <?php else : ?>
+                          <option value="<?= $categoria->getId() ?>">
+                            <?= $categoria->getDescricao() ?>
+                          </option>
+                        <?php endif ?>
+                      <?php endforeach ?>
+                    </select>
+                  </div>
+
+                <div class="form-group">
+                    <label for="sinopse">Sinopse</label>
+                    <textarea name="sinopse" class="form-control"><?= $livro->getSinopse()?></textarea> 
                 </div>
 
-                <input type="hidden" name="id" value="<?= $cliente->getId() ?>">"
+
+                <input type="hidden" name="id" value="<?= $livro->getId() ?>">"
 
                 <div class="form-group">
                     <input type="reset" value="Limpar" class="btn">
