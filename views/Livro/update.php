@@ -11,10 +11,10 @@
     $livro->setEditora($_POST['editora']);
     $livro->setPreco($_POST['preco']);
     $livro->setEstoque($_POST['estoque']);
-    $livro->setId_Categoria($_POST['id']);
+    $livro->setId($_POST['id']);
      // Instanciar um objeto da Categoria
     $categoria = new Categoria();
-    $categoria->setId($_POST['id_categoria']);
+    $categoria->setId($_POST['id_Categoria']);
 
     // Definir a categoria no filme
     $livro->setCategoria($categoria);

@@ -6,12 +6,23 @@
 
     //Definir os valores dos atributos a partir dos dados do form
 
-    $pedido->setNome($_POST['nome']);
-    $pedido->setEmail($_POST['email']);
-    $pedido->setSenha($_POST['senha']);
-    $pedido->setTelefone($_POST['telefone']);
-    $pedido->setTipo_usuario($_POST['tipo_usuario']);
-    $pedido->setId($_POST['id']);
+
+    // Definir os dados do pedido
+    $pedido->setDataPedido($_POST['data_pedido']);
+    $pedido->setValorTotal($_POST['valor_pedido']);
+    $pedido->setStatus($_POST['status']);
+
+    // Buscar o pagamento selecionado
+    $daoPagamento = new PagamentoDAO();
+    $pagamento = $daoPagamento->find($_POST['Pagamento_id_Pagamento']);
+    $pedido->setPagamento($pagamento);
+
+    // Buscar o cliente selecionado
+    $daoCliente = new ClienteDAO();
+    $cliente = $daoCliente->find($_POST['Cliente_id_Cliente']);
+    $pedido->setCliente($cliente);
+    
+    $pedido->setId_Pedido($_POST['id']);
 
     //instanciar objeto da classe pedidoDAO
     $dao = new pedidoDAO();

@@ -86,7 +86,7 @@
                 if($linha = $query->fetch(PDO::FETCH_ASSOC)) {
                     $pedido = new Pedido();
 
-                    $pedido->setId($linha['id_Pedido']);
+                    $pedido->setId_Pedido($linha['id_Pedido']);
                     $pedido->setDataPedido($linha['data_pedido']);
                     $pedido->setValorTotal($linha['valor_total']);
                     $pedido->setStatus($linha['status']);
@@ -131,7 +131,7 @@
                 // Bind para chave estrangeira Cliente
                 $query->bindValue(':c', $pedido->getCliente()->getId(), PDO::PARAM_INT);
 
-                $query->bindValue(':i', $pedido->getId(), PDO::PARAM_INT);
+                $query->bindValue(':i', $pedido->getId_Pedido(), PDO::PARAM_INT);
 
                 if(!$query->execute()) {
                     print_r($query->errorInfo());

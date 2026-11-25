@@ -400,23 +400,16 @@
                       <?php foreach ($daoCategoria->read() as $categoria) : ?>
                         <?php if ($categoria->getId() == $livro->getCategoria()->getId()) : ?>
                           <option select value="<?= $categoria->getId()?>">
-                            <?= $categoria->getDescricao() ?>
+                            <?= $categoria->getNome_categoria() ?>
                           </option>
                         <?php else : ?>
                           <option value="<?= $categoria->getId() ?>">
-                            <?= $categoria->getDescricao() ?>
+                            <?= $categoria->getNome_categoria() ?>
                           </option>
                         <?php endif ?>
                       <?php endforeach ?>
                     </select>
                   </div>
-
-                <div class="form-group">
-                    <label for="sinopse">Sinopse</label>
-                    <textarea name="sinopse" class="form-control"><?= $livro->getSinopse()?></textarea> 
-                </div>
-
-
                 <input type="hidden" name="id" value="<?= $livro->getId() ?>">"
 
                 <div class="form-group">

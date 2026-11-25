@@ -382,23 +382,27 @@
                     <th>ID</th>
                     <th>Data Pedido</th>
                     <th>Valor Total</th>
+                    <th>Cliente</th>
+                    <th>Pagamento</th>
                     <th>Status</th>
                     
                 </tr>
                 <?php foreach($dao->read() as $pedido) : ?>
                     <tr>
-                        <td><?= $pedido->getId() ?></td>
-                        <td><?= $pedido->getData_pedido() ?></td>
-                        <td><?= $pedido->getValor_total() ?></td>
+                        <td><?= $pedido->getId_Pedido() ?></td>
+                        <td><?= $pedido->getDataPedido() ?></td>
+                        <td><?= $pedido->getValorTotal() ?></td>
+                        <td><?= $pedido->getCliente()->getNome() ?></td>
+                        <td><?= $pedido->getPagamento()->getForma_pagamento() ?></td>
                         <td><?= $pedido->getStatus() ?></td>
                         <td>
-                          <a title="Editar" href="edit.php?id=<?= $pedido->getId()?>">
+                          <a title="Editar" href="edit.php?id=<?= $pedido->getId_Pedido()?>">
                           <i class="bi bi-pen"></i>
                           </a>
-                          <a title="Excluir" class="link-danger" href="destroy.php?id=<?= $pedido->getId()?>">
+                          <a title="Excluir" class="link-danger" href="destroy.php?id=<?= $pedido->getId_Pedido()?>">
                           <i class="bi bi-trash3"></i>
                           </a>
-                          <a title="Adicionar Livro" class="link-success" href="create.php?">
+                          <a title="Adicionar Livro" class="link-success" href="../PedidoLivro/create.php?id=<?= $pedido->getId_Pedido()?>"">
                           <i class="bi bi-book-half"></i>
                           </a>
                         </td>

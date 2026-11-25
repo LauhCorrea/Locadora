@@ -1,4 +1,9 @@
-```php
+<?php
+    require "../../autoload.php";
+
+    $daoPagamento = new PagamentoDAO();
+    $daoCliente = new ClienteDAO();
+?>
 <!doctype html>
 <html lang="pt-br" data-bs-theme="auto">
 
@@ -76,13 +81,37 @@
                                 <option value="">Selecione o pagamento</option>
 
                                 <?php
-                                $pagamentos = Pagamento::listar();
 
-                                foreach ($pagamentos as $pagamento) {
+                                foreach ($daoPagamento->read() as $pagamento) {
                                 ?>
 
-                                    <option value="<?= $pagamento->getIdPagamento() ?>">
-                                        <?= $pagamento->getNome() ?>
+                                    <option value="<?= $pagamento->getId() ?>">
+                                        <?= $pagamento->getForma_pagamento() ?>
+                                    </option>
+
+                                <?php
+                                }
+                                ?>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Cliente_id_Cliente">Cliente</label>
+
+                            <select name="Cliente_id_Cliente"
+                                id="Cliente_id_Cliente"
+                                class="form-control" required>
+
+                                <option value="">Selecione o pagamento</option>
+
+                                <?php
+
+                                foreach ($daoCliente->read() as $cliente) {
+                                ?>
+
+                                    <option value="<?= $cliente->getId() ?>">
+                                        <?= $cliente->getnome() ?>
                                     </option>
 
                                 <?php

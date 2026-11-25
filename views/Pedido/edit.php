@@ -3,6 +3,9 @@
 
     $dao = new PedidoDAO();
     $pedido = $dao->find($_GET['id']);
+    
+    $daoPagamento = new PagamentoDAO();
+    $daoCliente = new ClienteDAO();
 ?>
 
 <!doctype html>
@@ -374,23 +377,74 @@
             <form action="update.php" method="post">
                 <div class="form-group">
                     <label for="data_pedido">Data Pedido</label>
-                    <input type="text" name="data_pedido" value="<?= $pedido->getData_pedido() ?>" class="form-control">
+                    <input type="date" name="data_pedido" value="<?= $pedido->getDataPedido() ?>" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="valor-total">Valor Total</label>
-                    <input type="text" name="valor_pedido"  value="<?= $pedido->getValor_pedido() ?>"  class="form-control">
+                    <input type="text" name="valor_pedido"  value="<?= $pedido->getValorTotal() ?>"  class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="status">Status</label>
                     <input type="status" name="status"  value="<?= $pedido->getStatus() ?>" class="form-control">
                 </div>
+
+                <div class="form-group">
+                            <label for="Pagamento_id_Pagamento">Pagamento</label>
+
+                            <select name="Pagamento_id_Pagamento"
+                                id="Pagamento_id_Pagamento"
+                                class="form-control" required>
+
+                                <option value="">Selecione o pagamento</option>
+
+                                <?php
+
+                                foreach ($daoPagamento->read() as $pagamento) {
+                                ?>
+
+                                    <option <?= ($pedido->getPagamento()->getId() == $pagamento->getId()) ? "selected" : "" ?> value="<?= $pagamento->getId() ?>">
+                                        <?= $pagamento->getForma_pagamento() ?>
+                                    </option>
+
+                                <?php
+                                }
+                                ?>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Cliente_id_Cliente">Cliente</label>
+
+                            <select name="Cliente_id_Cliente"
+                                id="Cliente_id_Cliente"
+                                class="form-control" required>
+
+                                <option value="">Selecione o pagamento</option>
+
+                                <?php
+
+                                foreach ($daoCliente->read() as $cliente) {
+                                ?>
+
+                                    <option <?= ($pedido->getCliente()->getId() == $cliente->getId()) ? "selected" : "" ?> value="<?= $cliente->getId() ?>">
+                                        <?= $cliente->getnome() ?>
+                                    </option>
+
+                                <?php
+                                }
+                                ?>
+
+                            </select>
+                        </div>
                 
-                <input type="hidden" name="id" value="<?= $pedido->getId() ?>">"
+                <input type="hidden" name="id" value="<?= $pedido->getId_Pedido() ?>">"
 
                 <div class="form-group">
                     <input type="reset" value="Limpar" class="btn">
                     <input type="submit" value="Salvar" class="btn btn-success">
                 </div>
+                
             </form>
           </div>
         </main>
