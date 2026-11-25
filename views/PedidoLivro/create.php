@@ -99,43 +99,43 @@
                 </div>
 
                 <!-- Inserir uma tabela com os cadastrados -->
-                 <div class="table-responsive small">
-                <table class="table table-hover">
-                    <tr>
-                        <th>ID</th>
-                        <th>Título</th>
-                        <th>Autor</th>
-                        <th>Editora</th>
-                        <th>Preço</th>
-                        <th>Estoque</th>
-                        <th>Categoria</th>
-                        <th>Ações</th>
-                    </tr>
-                    <?php foreach($dao->read() as $livro) : ?>
-                        <tr>
-                            <td><?= $livro->getId() ?></td>
-                            <td><?= $livro->getTitulo() ?></td>
-                            <td><?= $livro->getAutor() ?></td>
-                            <td><?= $livro->getEditora() ?></td>
-                            <td><?= $livro->getPreco() ?></td>
-                            <td><?= $livro->getEstoque() ?></td>
-                            <td><?= $livro->getCategoria()->getNome_categoria() ?></td>
-                            <td>
-                            <a title="Editar" href="edit.php?id=<?= $livro->getId()?>">
-                                <i class="bi bi-pen"></i>
-                            </a>
-                            <a title="Excluir" class="link-danger" href="destroy.php?id=<?= $livro->getId()?>">
-                                <i class="bi bi-trash3"></i>
-                            </a>
-                            </td>
-                        </tr>
-                    <?php endforeach ?>
-                </table>
-            </div>
+                <div class="table-responsive small">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Quantidade</th>
+                                <th>Título</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-            </main>
-        </div>
-    </div>
+                            <?php foreach ($PedidoLivroDAO->read() as $PedidoLivro) : ?>
+                                <tr>
+                                    <td>
+                                        <?= $PedidoLivro->getQuantidade() ?>
+                                    </td>
+
+                                    <td>
+                                        <?= $PedidoLivro->getLivro()->getTitulo() ?>
+                                    </td>
+
+                                    <td>
+                                        <a title="Excluir"
+                                        class="link-danger"
+                                        href="destroy.php?id=<?= $PedidoLivro->getIdPedido() ?>"
+                                        onclick="return confirm('Deseja realmente excluir este pedido?')">
+                                            <i class="bi bi-trash3"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+
+</main>
+</div>
+</div>
 
     <script src="../../js/bootstrap.bundle.min.js"></script>
     <script src="../../js/dashboard.js"></script>
