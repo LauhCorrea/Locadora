@@ -1,23 +1,28 @@
 <?php
-    // Incluir o arquivo de autoload
-    require "../../autoload.php";
+require "../../autoload.php";
 
-    // Instanciar um objeto da classe pedido (bean)
-    $pedido = new Pedido();
+// Instanciar o pedido
+$pedido = new Pedido();
 
-    // Definir os valores dos atributos a partir do form
-    $pedido->setNome($_POST['nome']);
-    $pedido->setEmail($_POST['email']);
-    $pedido->setSenha($_POST['senha']);
-    $pedido->setTelefone($_POST['telefone']);
-    $pedido->setTipo_usuario($_POST['tipo_usuario']);
+// Definir os dados do pedido
+$pedido->setDataPedido($_POST['data_pedido']);
+$pedido->setValorTotal($_POST['valor_total']);
+$pedido->setStatus($_POST['status']);
 
+// Buscar o pagamento selecionado
+$daoPagamento = new PagamentoDAO();
+$pagamento = $daoPagamento->find($_POST['Pagamento_id_Pagamento']);
+$pedido->setPagamento($pagamento);
 
-    // Instanciar um objeto da classe pedidoDAO
-    $dao = new pedidoDAO();
+// Buscar o cliente selecionado
+$daoCliente = new ClienteDAO();
+$cliente = $daoCliente->find($_POST['Cliente_id_Cliente']);
+$pedido->setCliente($cliente);
 
-    // Invocar o método create
-    $dao->create($pedido);
+// Criar o pedido
+$dao = new PedidoDAO();
+$dao->create($pedido);
 
-    // Redirecionar para o index (COMENTAR CASO NÃO FUNCIONE)
-    header('Location: index.php');
+// Redirecionar
+header('Location: index.php');
+exit;

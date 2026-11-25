@@ -45,7 +45,7 @@
         public function find($id) {
             try {
                 $query = BD::getConexao()->prepare("SELECT * FROM categoria WHERE id_Categoria= :i");
-                $query->bindValue(':i', $id, PDO::PARAM_INT);
+                $query->bindValue(':i', $id, PDO::PARAM_STR);
 
                 if(!$query->execute()) {
                     print_r($query->errorInfo());

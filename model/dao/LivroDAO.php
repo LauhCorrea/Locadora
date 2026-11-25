@@ -7,7 +7,7 @@
                     VALUES (:t, :a, :e, :p, :q, :c)"
                 );
                 $query->bindValue(':t', $livro->getTitulo(), PDO::PARAM_STR);
-                $query->bindValue(':a', $livro->getAutor(), PDO::PARAM_INT);
+                $query->bindValue(':a', $livro->getAutor(), PDO::PARAM_STR);
                 $query->bindValue(':e', $livro->getEditora(), PDO::PARAM_STR);
                 $query->bindValue(':p', $livro->getPreco(), PDO::PARAM_INT);
                 $query->bindValue(':q', $livro->getEstoque(), PDO::PARAM_INT);
@@ -58,7 +58,7 @@
         public function find($id) {
             try {
                 $query = BD::getConexao()->prepare(
-                    "SELECT * FROM livro WHERE id_livro = :i"
+                    "SELECT * FROM livro WHERE id_Livro = :i"
                 );
                 $query->bindValue(':i', $id, PDO::PARAM_INT);
                 
@@ -68,12 +68,18 @@
 
                 if($linha = $query->fetch(PDO::FETCH_ASSOC)) {
                     $livro = new livro(); // Classe bean
-                    $livro->setId($linha['id_livro']);
+                    $livro->setId($linha['id_Livro']);
                     $livro->setTitulo($linha['titulo']);
                     $livro->setAutor($linha['autor']);
                     $livro->setEditora($linha['editora']);
                     $livro->setPreco($linha['preco']);
                     $livro->setEstoque($linha['estoque']);
+
+                     //Atributo da associação com Categoria
+                    $daoCategoria = new CategoriaDAO();
+                    $categoria = $daoCategoria->find($linha['id_Categoria']);
+                    $livro->setCategoria($categoria);
+
                 }
                 
                 return $livro;
@@ -91,10 +97,10 @@
                     WHERE id_livro = :i"
                 );
                 $query->bindValue(':t', $livro->getTitulo(), PDO::PARAM_STR);
-                $query->bindValue(':a', $livro->getAutor(), PDO::PARAM_INT);
+                $query->bindValue(':a', $livro->getAutor(), PDO::PARAM_STR);
                 $query->bindValue(':e', $livro->getEditora(), PDO::PARAM_STR);
                 $query->bindValue(':p', $livro->getPreco(), PDO::PARAM_INT);
-                $query->bindValue(':q', $livro->getestoque(), PDO::PARAM_INT);
+                $query->bindValue(':q', $livro->getEstoque(), PDO::PARAM_INT);
                 $query->bindValue(':i', $livro->getId(), PDO::PARAM_INT);
 
                 if(!$query->execute()) {

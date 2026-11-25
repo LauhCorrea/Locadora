@@ -398,6 +398,9 @@
                           <a title="Excluir" class="link-danger" href="destroy.php?id=<?= $pedido->getId()?>">
                           <i class="bi bi-trash3"></i>
                           </a>
+                          <a title="Adicionar Livro" class="link-success" href="create.php?">
+                          <i class="bi bi-book-half"></i>
+                          </a>
                         </td>
                     </tr>
                 <?php endforeach ?>
