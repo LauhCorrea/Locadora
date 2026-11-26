@@ -7,11 +7,11 @@
             try {
                 $query = BD::getConexao()->prepare(
                     "INSERT INTO pedido_has_livro1
-                    (quantidade,Pedido_id_Pedido, Livro_id_Livro)
+                    (quantidade, Pedido_id_Pedido, Livro_id_Livro)
                     VALUES (:q, :p, :L)"
                 );
 
-                $query->bindValue(':q', $PedidoLivro->getquantidade(), PDO::PARAM_INT);
+                $query->bindValue(':q', $PedidoLivro->getQuantidade(), PDO::PARAM_INT);
                 $query->bindValue(':p', $PedidoLivro->getPedido()->getId_Pedido(), PDO::PARAM_INT);
                 $query->bindValue(':L', $PedidoLivro->getLivro()->getId(), PDO::PARAM_INT);
 
@@ -26,10 +26,10 @@
         }
 
 
-        public function read($idPedido) {
+        public function read($id_Pedido) {
             try {
                 $query = BD::getConexao()->prepare("SELECT * FROM pedido_has_livro1 WHERE Pedido_id_Pedido = :p");
-                $query->bindValue(':p', $idPedido, PDO::PARAM_INT);
+                $query->bindValue(':p', $id_Pedido, PDO::PARAM_INT);
 
                 if(!$query->execute()) {
                     print_r($query->errorInfo());
@@ -40,7 +40,7 @@
                 foreach($query->fetchAll(PDO::FETCH_ASSOC) as $linha) {
                     $PedidoLivro = new PedidoLivro();
 
-                    $PedidoLivro->setquantidade($linha['quantidade']);
+                    $PedidoLivro->setQuantidade($linha['quantidade']);
                   
 
                     // Associação com Pedido
@@ -50,7 +50,7 @@
 
                     // Associação com Livro
                     $daoLivro = new LivroDAO();
-                    $Livro = $daoLivro->find($linha['Livro_id_Livro']);
+                    $livro = $daoLivro->find($linha['Livro_id_Livro']);
                     $PedidoLivro->setLivro($livro);
 
                     array_push($listaPedidoLivros, $PedidoLivro);

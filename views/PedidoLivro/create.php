@@ -2,6 +2,7 @@
     require "../../autoload.php";
 
     $daoLivro = new LivroDAO();
+    $PedidoLivro = new PedidoLivroDAO();
 ?>
 <!doctype html>
 <html lang="pt-br" data-bs-theme="auto">
@@ -54,7 +55,7 @@
 
                         <div class="form-group">
                             <label for="quantidade">Quantidade</label>
-                            <input type="number" name="quantidade" id="valor_total"
+                            <input type="number" name="quantidade" id="quantidade"
                                 class="form-control" step="0.01" min="0" required>
                         </div>
 
@@ -68,13 +69,12 @@
                                 <option value="">Selecione o Livro</option>
 
                                 <?php
-
                                 foreach ($daoLivro->read() as $Livro) {
                                 ?>
 
-                                    <option value="<?= $Livro->getId() ?>">
-                                        <?= $Livro->getTitulo() ?>
-                                    </option>
+                                <option value="<?= $Livro->getId() ?>">
+                                    <?= $Livro->getTitulo() ?>
+                                </option>
 
                                 <?php
                                 }
@@ -105,11 +105,12 @@
                             <tr>
                                 <th>Quantidade</th>
                                 <th>Título</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            <?php foreach ($PedidoLivroDAO->read() as $PedidoLivro) : ?>
+                            <?php foreach ($PedidoLivro->read( $_GET['id'] ) as $PedidoLivro) : ?>
                                 <tr>
                                     <td>
                                         <?= $PedidoLivro->getQuantidade() ?>
@@ -119,15 +120,7 @@
                                         <?= $PedidoLivro->getLivro()->getTitulo() ?>
                                     </td>
 
-                                    <td>
-                                        <a title="Excluir"
-                                        class="link-danger"
-                                        href="destroy.php?id=<?= $PedidoLivro->getIdPedido() ?>"
-                                        onclick="return confirm('Deseja realmente excluir este pedido?')">
-                                            <i class="bi bi-trash3"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                    
                             <?php endforeach; ?>
                         </tbody>
                     </table>
